@@ -3,9 +3,9 @@
  */
 var APP_ID = /**I've removed my app id for now
 /**
- * Array containing language facts.
+ * Array containing koans.
  */
-var LINGO_FACTS = [
+var ZEN_KOANS = [
   "When you paint Spring, do not paint willows, plums, peaches, or apricots, but just paint Spring. To paint willows, plums, peaches, or apricots is to paint willows, plums, peaches, or apricots - it is not yet painting Spring.",
   "The fundamental delusion of humanity is to suppose that I am here and you are out there. Yasutani Roshi",
   "What was your original face, the one you had before your parents gave birth to you?",
@@ -44,46 +44,46 @@ var LINGO_FACTS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
- * LingoInfo is a child of AlexaSkill.
+ * FindYourZen is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
  */
-var LingoInfo = function () {
+var ZenKoan = function () {
     AlexaSkill.call(this, APP_ID);
 };
 
 // Extend AlexaSkill
-LingoInfo.prototype = Object.create(AlexaSkill.prototype);
-LingoInfo.prototype.constructor = LingoInfo;
+ZenKoan.prototype = Object.create(AlexaSkill.prototype);
+ZenKoan.prototype.constructor = ZenKoan;
 
-LingoInfo.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-    console.log("LingoInfo onSessionStarted requestId: " + sessionStartedRequest.requestId
+ZenKoan.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+    console.log("ZenKoan onSessionStarted requestId: " + sessionStartedRequest.requestId
         + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
-LingoInfo.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("LingoInfo onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+ZenKoan.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    console.log("ZenKoan onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     handleNewFactRequest(response);
 };
 
 /**
  * Overridden to show that a subclass can override this function to teardown session state.
  */
-LingoInfo.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-    console.log("LingoInfo onSessionEnded requestId: " + sessionEndedRequest.requestId
+ZenKoan.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+    console.log("ZenKoan onSessionEnded requestId: " + sessionEndedRequest.requestId
         + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
-LingoInfo.prototype.intentHandlers = {
+ZenKoan.prototype.intentHandlers = {
     "GetNewKoanIntent": function (intent, session, response) {
         handleNewFactRequest(response);
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can ask Lingo Info tell me a language fact, or, you can say exit... What can I help you with?", "What can I help you with?");
+        response.ask("You can ask Find Your Zen tell me a koan, or, you can say exit... What can I help you with?", "What can I help you with?");
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
@@ -91,9 +91,11 @@ LingoInfo.prototype.intentHandlers = {
         response.tell(speechOutput);
     },
 
-    "AMAZON.RepeatIntent":
-
+    "AMAZON.RepeatIntent": function (intent, session, response) {
+      var speechOutput = "";
+      response.tell(speechOutput);
     },
+
     "AMAZON.CancelIntent": function (intent, session, response) {
         var speechOutput = "Goodbye";
         response.tell(speechOutput);
@@ -101,22 +103,22 @@ LingoInfo.prototype.intentHandlers = {
 };
 
 /**
- * Gets a random new fact from the list and returns to the user.
+ * Gets a random new koan from the list and returns to the user.
  */
 function handleNewFactRequest(response) {
-    // Get a random language fact from the language facts list
-    var factIndex = Math.floor(Math.random() * LINGO_FACTS.length);
-    var fact = LINGO_FACTS[factIndex];
+    // Get a random koan from a list of koans
+    var factIndex = Math.floor(Math.random() * ZEN_KOANS.length);
+    var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Here's your language fact: " + fact;
+    var speechOutput = "Here's your koan: " + fact;
 
-    response.tellWithCard(speechOutput, "LingoInfo", speechOutput);
+    response.tellWithCard(speechOutput, "ZenKoan", speechOutput);
 }
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
-    // Create an instance of the LingoInfo skill.
-    var lingoInfo = new LingoInfo();
-    lingoInfo.execute(event, context);
+    // Create an instance of the ZenKoan skill.
+    var ZenKoan = new ZenKoan();
+    zenKoan.execute(event, context);
 };
