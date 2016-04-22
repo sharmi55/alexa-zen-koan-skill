@@ -88,11 +88,7 @@ ZenKoan.prototype.intentHandlers = {
     "AMAZON.StopIntent": function (intent, session, response) {
         var speechOutput = "Goodbye";
         response.tell(speechOutput);
-    },
 
-    "AMAZON.RepeatIntent": function (intent, session, response) {
-      var speechOutput = "";
-      response.tell(speechOutput);
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
