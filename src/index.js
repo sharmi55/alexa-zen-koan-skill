@@ -1,9 +1,8 @@
 /**
  * App ID for the skill
  */
-var APP_ID = /**I've removed my app id for now
-/**
- * Array containing koans.
+var APP_ID = "amzn1.echo-sdk-ams.app.d0aad8a4-1d12-4eca-920f-0a167ad96b3e"
+/* Array containing koans.
  */
 var ZEN_KOANS = [
   "When you paint Spring, do not paint willows, plums, peaches, or apricots, but just paint Spring. To paint willows, plums, peaches, or apricots is to paint willows, plums, peaches, or apricots - it is not yet painting Spring.",
@@ -65,7 +64,7 @@ ZenKoan.prototype.eventHandlers.onSessionStarted = function (sessionStartedReque
 
 ZenKoan.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("ZenKoan onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    handleNewFactRequest(response);
+    handleNewKoanRequest(response);
 };
 
 /**
@@ -79,7 +78,7 @@ ZenKoan.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, 
 
 ZenKoan.prototype.intentHandlers = {
     "GetNewKoanIntent": function (intent, session, response) {
-        handleNewFactRequest(response);
+        handleNewKoanRequest(response);
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
@@ -105,15 +104,27 @@ ZenKoan.prototype.intentHandlers = {
 /**
  * Gets a random new koan from the list and returns to the user.
  */
-function handleNewFactRequest(response) {
+function handleNewKoanRequest(response) {
     // Get a random koan from a list of koans
-    var factIndex = Math.floor(Math.random() * ZEN_KOANS.length);
-    var fact = ZEN_KOANS[factIndex];
+    var koanIndex = Math.floor(Math.random() * ZEN_KOANS.length);
+    var koan = ZEN_KOANS[koanIndex];
 
     // Create speech output
-    var speechOutput = "Here's your koan: " + fact;
+    var speechOutput = "Here's your koan: " + koan;
 
     response.tellWithCard(speechOutput, "ZenKoan", speechOutput);
+}
+
+//add possible repeat functionality
+function handleRepeatRequest(intent, session, callback) {
+    // Repeat the previous speechOutput and repromptText from the session attributes if available
+    // else start a new game session
+    if (!session.attributes || !session.attributes.speechOutput) {
+        getWelcomeResponse(callback);
+    } else {
+        callback(session.attributes,
+            buildSpeechletResponseWithoutCard(session.attributes.speechOutput, session.attributes.repromptText, false));
+    }
 }
 
 // Create the handler that responds to the Alexa Request.
