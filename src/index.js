@@ -6,7 +6,7 @@ var APP_ID = "amzn1.echo-sdk-ams.app.d0aad8a4-1d12-4eca-920f-0a167ad96b3e";
  */
 var ZEN_KOANS = [
   "When you paint Spring, do not paint willows, plums, peaches, or apricots, but just paint Spring. To paint willows, plums, peaches, or apricots is to paint willows, plums, peaches, or apricots - it is not yet painting Spring.",
-  "The fundamental delusion of humanity is to suppose that I am here and you are out there. Yasutani Roshi",
+  "The fundamental delusion of humanity is to suppose that I am here and you are out there.",
   "What was your original face, the one you had before your parents gave birth to you?",
   "When you can do nothing, what can you do?",
   "What is the color of wind?",
@@ -57,8 +57,7 @@ ZenKoan.prototype = Object.create(AlexaSkill.prototype);
 ZenKoan.prototype.constructor = ZenKoan;
 
 ZenKoan.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-    console.log("ZenKoan onSessionStarted requestId: " + sessionStartedRequest.requestId
-        + ", sessionId: " + session.sessionId);
+    console.log("ZenKoan onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
@@ -71,8 +70,7 @@ ZenKoan.prototype.eventHandlers.onLaunch = function (launchRequest, session, res
  * Overridden to show that a subclass can override this function to teardown session state.
  */
 ZenKoan.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-    console.log("ZenKoan onSessionEnded requestId: " + sessionEndedRequest.requestId
-        + ", sessionId: " + session.sessionId);
+    console.log("ZenKoan onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
@@ -106,7 +104,7 @@ function handleNewKoanRequest(response) {
     var koan = ZEN_KOANS[koanIndex];
 
     // Create speech output
-    var speechOutput = "Here's your koan: " + koan;
+    var speechOutput = "Reflect on this koan: " + koan;
 
     response.tellWithCard(speechOutput, "ZenKoan", speechOutput);
 }
