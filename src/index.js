@@ -1,7 +1,7 @@
 /**
  * App ID for the skill
  */
-var APP_ID = "amzn1.echo-sdk-ams.app.d0aad8a4-1d12-4eca-920f-0a167ad96b3e"
+var APP_ID = "amzn1.echo-sdk-ams.app.d0aad8a4-1d12-4eca-920f-0a167ad96b3e";
 /* Array containing koans.
  */
 var ZEN_KOANS = [
