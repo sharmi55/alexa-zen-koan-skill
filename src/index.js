@@ -72,7 +72,6 @@ var ZEN_KOANS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
- * SpaceGeek is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
@@ -132,7 +131,7 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Now, for your reflection: " + fact;
+    var speechOutput = "For your reflection: " + <audio src="https://www.freesound.org/people/juskiddink/sounds/68261/" /> + fact + <audio src="https://www.freesound.org/people/juskiddink/sounds/68261/" />;
 
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
