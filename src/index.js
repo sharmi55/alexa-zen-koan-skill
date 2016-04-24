@@ -1,10 +1,37 @@
 /**
+    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+        http://aws.amazon.com/apache2.0/
+    or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+
+/**
+ * This simple sample has no external dependencies or session management, and shows the most basic
+ * example of how to create a Lambda function for handling Alexa Skill requests.
+ *
+ * Examples:
+ * One-shot model:
+ *  User: "Alexa, ask FindYourZen for a koan"
+ *  Alexa: "Here's your koan: ..."
+ */
+
+/**
  * App ID for the skill
  */
-var APP_ID = "amzn1.echo-sdk-ams.app.d0aad8a4-1d12-4eca-920f-0a167ad96b3e";
+var APP_ID = "amzn1.echo-sdk-ams.app.d6c2b985-5945-43f9-aec2-f441d7f6365a";
+
 /* Array containing koans.
  */
+
 var ZEN_KOANS = [
+  "Stop the war.",
+  "Save a ghost",
+  "Who is hearing this sound?",
+  "Sickness and medicine are in accord with each other. The whole world is medicine. What am I?",
+  "If you turn things around you are like the Buddha.",
+  "There is a true person of no rank who is constantly coming and going from the portals of your face. Who is that true person of no rank?",
+  "A student asked Zhaozhou, “Does a dog have Buddha Nature?” Zhaozhou said, 'No.'",
+  "In the sea, ten thousand feet down, there’s a single stone. I’ll pick it up without wetting my hands.",
   "When you paint Spring, do not paint willows, plums, peaches, or apricots, but just paint Spring. To paint willows, plums, peaches, or apricots is to paint willows, plums, peaches, or apricots - it is not yet painting Spring.",
   "The fundamental delusion of humanity is to suppose that I am here and you are out there.",
   "What was your original face, the one you had before your parents gave birth to you?",
@@ -43,50 +70,49 @@ var ZEN_KOANS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
- * FindYourZen is a child of AlexaSkill.
+ * SpaceGeek is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
  */
-var ZenKoan = function () {
+var SpaceGeek = function () {
     AlexaSkill.call(this, APP_ID);
 };
 
 // Extend AlexaSkill
-ZenKoan.prototype = Object.create(AlexaSkill.prototype);
-ZenKoan.prototype.constructor = ZenKoan;
+SpaceGeek.prototype = Object.create(AlexaSkill.prototype);
+SpaceGeek.prototype.constructor = SpaceGeek;
 
-ZenKoan.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-    console.log("ZenKoan onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
+SpaceGeek.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+    console.log("FindYourZen onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
-ZenKoan.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("ZenKoan onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    handleNewKoanRequest(response);
+SpaceGeek.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    console.log("FindYourZen onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+    handleNewFactRequest(response);
 };
 
 /**
  * Overridden to show that a subclass can override this function to teardown session state.
  */
-ZenKoan.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-    console.log("ZenKoan onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);
+SpaceGeek.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+    console.log("FindYourZen onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
-ZenKoan.prototype.intentHandlers = {
-    "GetNewKoanIntent": function (intent, session, response) {
-        handleNewKoanRequest(response);
+SpaceGeek.prototype.intentHandlers = {
+    "GetNewFactIntent": function (intent, session, response) {
+        handleNewFactRequest(response);
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can ask Find Your Zen tell me a koan, or, you can say exit... What can I help you with?", "What can I help you with?");
+        response.ask("You can ask Find Your Zen 'tell me a koan', or, you can say exit... What can I help you with?", "What can I help you with?");
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
         var speechOutput = "Goodbye";
         response.tell(speechOutput);
-
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
@@ -98,32 +124,20 @@ ZenKoan.prototype.intentHandlers = {
 /**
  * Gets a random new koan from the list and returns to the user.
  */
-function handleNewKoanRequest(response) {
-    // Get a random koan from a list of koans
-    var koanIndex = Math.floor(Math.random() * ZEN_KOANS.length);
-    var koan = ZEN_KOANS[koanIndex];
+function handleNewFactRequest(response) {
+    // Get a random koan from the language facts list
+    var factIndex = Math.floor(Math.random() * ZEN_KOANS.length);
+    var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Reflect on this koan: " + koan;
+    var speechOutput = "Now, for your reflection: " + fact;
 
-    response.tellWithCard(speechOutput, "ZenKoan", speechOutput);
-}
-
-//add possible repeat functionality
-function handleRepeatRequest(intent, session, callback) {
-    // Repeat the previous speechOutput and repromptText from the session attributes if available
-    // else start a new game session
-    if (!session.attributes || !session.attributes.speechOutput) {
-        getWelcomeResponse(callback);
-    } else {
-        callback(session.attributes,
-            buildSpeechletResponseWithoutCard(session.attributes.speechOutput, session.attributes.repromptText, false));
-    }
+    response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
-    // Create an instance of the ZenKoan skill.
-    var ZenKoan = new ZenKoan();
-    zenKoan.execute(event, context);
+    // Create an instance of the FindYourZen skill.
+    var spaceGeek = new SpaceGeek();
+    spaceGeek.execute(event, context);
 };
