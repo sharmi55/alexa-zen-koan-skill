@@ -102,7 +102,7 @@ SpaceGeek.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest
 };
 
 SpaceGeek.prototype.intentHandlers = {
-    "GetNewFactIntent": function (intent, session, response) {
+    "GetNewKoanIntent": function (intent, session, response) {
         handleNewFactRequest(response);
     },
 
