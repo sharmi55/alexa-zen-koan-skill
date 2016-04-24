@@ -1,10 +1,10 @@
-GetNewFactIntent ask Find Your Zen for a Fact
-GetNewFactIntent a koan
-GetNewFactIntent a zen koan
-GetNewFactIntent a new koan
-GetNewFactIntent tell me a koan
-GetNewFactIntent tell me a zen koan
-GetNewFactIntent give me a koan
-GetNewFactIntent give me a zen koan
-GetNewFactIntent tell me something
-GetNewFactIntent give me something
+GetNewKoanIntent ask Find Your Zen for a Fact
+GetNewKoanIntent a koan
+GetNewKoanIntent a zen koan
+GetNewKoanIntent a new koan
+GetNewKoanIntent tell me a koan
+GetNewKoanIntent tell me a zen koan
+GetNewKoanIntent give me a koan
+GetNewKoanIntent give me a zen koan
+GetNewKoanIntent tell me something
+GetNewKoanIntent give me something
