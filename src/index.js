@@ -60,8 +60,10 @@ var ZEN_KOANS = [
   "Out of nowhere, the mind comes forth.",
   "What moves: the flag or the wind?",
   "If you are unable to find the truth right where you ar, where else do you expect to find it?",
-  "The great Way is not difficult, if you just don’t pick and choose",
-  "A monk told Joshu, 'I have just entered this monastery. I beg you to teach me.' Joshu asked, 'Have you eaten your rice porridge?' The monk replied, 'I have.' 'Then,' said Joshu, 'Go and wash your bowl.' At that moment the monk was enlightened."
+  "A monk told Joshu, 'I have just entered this monastery. I beg you to teach me.' Joshu asked, 'Have you eaten your rice porridge?' The monk replied, 'I have.' 'Then,' said Joshu, 'Go and wash your bowl.' At that moment the monk was enlightened.",
+  "The coin lost in the river is found in the river.",
+  "The great Way is not difficult if you just do not pick and choose"
+
 ];
 
 /**
