@@ -103,7 +103,7 @@ SpaceGeek.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest
 
 SpaceGeek.prototype.intentHandlers = {
     "GetNewKoanIntent": function (intent, session, response) {
-        handleNewKoanRequest(response);
+        handleNewFactRequest(response);
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
@@ -124,7 +124,7 @@ SpaceGeek.prototype.intentHandlers = {
 /**
  * Gets a random new koan from the list and returns to the user.
  */
-function handleNewKoanRequest(response) {
+function handleNewFactRequest(response) {
     // Get a random koan from the language facts list
     var factIndex = Math.floor(Math.random() * ZEN_KOANS.length);
     var fact = ZEN_KOANS[factIndex];
