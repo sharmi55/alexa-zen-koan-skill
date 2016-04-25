@@ -131,7 +131,13 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "For your reflection: " + <audio src="https://www.freesound.org/people/juskiddink/sounds/68261/" /> + fact + <audio src="https://www.freesound.org/people/juskiddink/sounds/68261/" />;
+    var speechOutput = {
+      speech: "<speak> For your reflection: "
+      + "<audio src='https://s3.amazonaws.com/findyourzen/Bell.mp3' /> "
+      + fact
+      + "<audio src='https://s3.amazonaws.com/findyourzen/Bell.mp3' /> "
+      + "</speak>"
+    };
 
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
