@@ -132,8 +132,14 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Now, for your reflection: " + fact;
-
+    var speechOutput: {
+      type: "SSML",
+      ssml: "<speak> Reflect upon this: <break time="1s"/>
+      + <audio src='https://s3.amazonaws.com/ask-storage/findyourzen/Bell.mp3' />
+      + fact
+      + <audio src='https://s3.amazonaws.com/ask-storage/findyourzen/Bell.mp3' />
+      + </speak>"
+    };
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
 
