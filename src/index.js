@@ -72,25 +72,25 @@ var ZEN_KOANS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
- * SpaceGeek is a child of AlexaSkill.
+ * Koans is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
  */
-var SpaceGeek = function () {
+var Koans = function () {
     AlexaSkill.call(this, APP_ID);
 };
 
 // Extend AlexaSkill
-SpaceGeek.prototype = Object.create(AlexaSkill.prototype);
-SpaceGeek.prototype.constructor = SpaceGeek;
+Koans.prototype = Object.create(AlexaSkill.prototype);
+Koans.prototype.constructor = Koans;
 
-SpaceGeek.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+Koans.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
     console.log("FindYourZen onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
-SpaceGeek.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+Koans.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("FindYourZen onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     handleNewFactRequest(response);
 };
@@ -98,12 +98,12 @@ SpaceGeek.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
 /**
  * Overridden to show that a subclass can override this function to teardown session state.
  */
-SpaceGeek.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+Koans.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
     console.log("FindYourZen onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
-SpaceGeek.prototype.intentHandlers = {
+Koans.prototype.intentHandlers = {
     "GetNewKoanIntent": function (intent, session, response) {
         handleNewFactRequest(response);
     },
@@ -132,7 +132,7 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Now, for your reflection: " + fact;
+    var speechOutput: "Reflect upon this" + fact;
 
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
@@ -140,6 +140,7 @@ function handleNewFactRequest(response) {
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
     // Create an instance of the FindYourZen skill.
-    var spaceGeek = new SpaceGeek();
-    spaceGeek.execute(event, context);
+    var koans = new Koans();
+    .execute(event, context);
 };
+//
