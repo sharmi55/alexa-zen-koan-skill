@@ -113,12 +113,12 @@ SpaceGeek.prototype.intentHandlers = {
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you";
         response.tell(speechOutput);
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you";
         response.tell(speechOutput);
     }
 };
