@@ -116,12 +116,12 @@ Koans.prototype.intentHandlers = {
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you";
         response.tell(speechOutput);
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you";
         response.tell(speechOutput);
     }
 };
@@ -143,6 +143,8 @@ function handleNewFactRequest(response) {
         + "</speak>",
       type: AlexaSkill.speechOutputType.SSML
     };
+//test passes with correct type in AWS test but not in Alexa developer portal.
+
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
 
