@@ -134,11 +134,11 @@ function handleNewFactRequest(response) {
     // Create speech output
     var speechOutput: {
       type: "SSML",
-      ssml: "<speak> Reflect upon this: <break time="1s"/>
-      + <audio src='https://s3.amazonaws.com/ask-storage/findyourzen/Bell.mp3' />
-      + fact
-      + <audio src='https://s3.amazonaws.com/ask-storage/findyourzen/Bell.mp3' />
-      + </speak>"
+      SSML: "<speak> Reflect <break time=\"20ms\"/> upon <break time=\"10ms\"/> this: 
+              + fact
+            </speak>",
+
+      type: AlexaSkill.speechOutputType.SSML
     };
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
