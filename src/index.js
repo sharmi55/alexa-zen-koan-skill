@@ -72,7 +72,10 @@ var ZEN_KOANS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
+<<<<<<< HEAD
  * Koans is a child of AlexaSkill.
+=======
+>>>>>>> audio
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
@@ -132,8 +135,14 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput: "Reflect upon this" + fact;
-
+    var speechOutput = {
+      speech: "<speak> Reflect upon <break time=\"10ms\"/> this. <break time=\"1s\"/>"
+        + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
+        + fact
+        + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
+        + "</speak>",
+      type: AlexaSkill.speechOutputType.SSML
+    };
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
 
