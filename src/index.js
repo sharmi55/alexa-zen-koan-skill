@@ -72,28 +72,25 @@ var ZEN_KOANS = [
 var AlexaSkill = require('./AlexaSkill');
 
 /**
-<<<<<<< HEAD
- * Koans is a child of AlexaSkill.
-=======
->>>>>>> audio
+ * SpaceGeek is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
  */
-var Koans = function () {
+var SpaceGeek = function () {
     AlexaSkill.call(this, APP_ID);
 };
 
 // Extend AlexaSkill
-Koans.prototype = Object.create(AlexaSkill.prototype);
-Koans.prototype.constructor = Koans;
+SpaceGeek.prototype = Object.create(AlexaSkill.prototype);
+SpaceGeek.prototype.constructor = SpaceGeek;
 
-Koans.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+SpaceGeek.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
     console.log("FindYourZen onSessionStarted requestId: " + sessionStartedRequest.requestId + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
-Koans.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+SpaceGeek.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("FindYourZen onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     handleNewFactRequest(response);
 };
@@ -101,12 +98,12 @@ Koans.prototype.eventHandlers.onLaunch = function (launchRequest, session, respo
 /**
  * Overridden to show that a subclass can override this function to teardown session state.
  */
-Koans.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+SpaceGeek.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
     console.log("FindYourZen onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
-Koans.prototype.intentHandlers = {
+SpaceGeek.prototype.intentHandlers = {
     "GetNewKoanIntent": function (intent, session, response) {
         handleNewFactRequest(response);
     },
@@ -116,12 +113,12 @@ Koans.prototype.intentHandlers = {
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
-        var speechOutput = "Peace be with you";
+        var speechOutput = "Peace be with you.";
         response.tell(speechOutput);
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
-        var speechOutput = "Peace be with you";
+        var speechOutput = "Peace be with you.";
         response.tell(speechOutput);
     }
 };
@@ -146,12 +143,11 @@ function handleNewFactRequest(response) {
 //test passes with correct type in AWS test but not in Alexa developer portal.
 
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
-}
+};
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
     // Create an instance of the FindYourZen skill.
-    var koans = new Koans();
-    .execute(event, context);
+    var spaceGeek = new SpaceGeek();
+    spaceGeek.execute(event, context);
 };
-//
