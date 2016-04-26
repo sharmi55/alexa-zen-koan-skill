@@ -134,10 +134,9 @@ function handleNewFactRequest(response) {
     // Create speech output
     var speechOutput: {
       type: "SSML",
-      SSML: "<speak> Reflect <break time=\"20ms\"/> upon <break time=\"10ms\"/> this: 
+      SSML: <speak> Reflect <break time=\"20ms\"/> upon <break time=\"10ms\"/> this:
               + fact
-            </speak>",
-
+            </speak>,
       type: AlexaSkill.speechOutputType.SSML
     };
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
