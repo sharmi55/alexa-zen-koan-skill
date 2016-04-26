@@ -132,7 +132,7 @@ function handleNewFactRequest(response) {
 
     // Create speech output
     var speechOutput = {
-      speech: "<speak> For your reflection: "
+      speech: "<speak> Reflect upon <break time=\"10ms\"/> this. <break time=\"1s\"/>"
         + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
         + fact
         + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
