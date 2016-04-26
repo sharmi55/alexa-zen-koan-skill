@@ -133,7 +133,7 @@ function handleNewFactRequest(response) {
 
     // Create speech output
     var speechOutput = {
-      speech: "<speak> Reflect <break time=\"10ms\"/> upon <break time=\"10ms\"/> this <break time=\"1s\"/>:" + fact + "</speak>",
+      speech: "<speak> Reflect <break time=\"10ms\"/> upon <break time=\"10ms\"/> this. <break time=\"1s\"/>" + fact + "</speak>",
       type: AlexaSkill.speechOutputType.SSML
     };
 //test passes with correct type in AWS test but not in Alexa developer portal.
