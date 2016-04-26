@@ -133,10 +133,9 @@ function handleNewFactRequest(response) {
     // Create speech output
     var speechOutput = {
       speech: "<speak> For your reflection: "
-        + "<audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>"
+        + "<audio src="https://s3.amazonaws.com/findyourzen/audio/bell.mp3"/>"
         + fact
-//        + "<break time="2s"/>"
-//        + "<audio src="https://s3.amazonaws.com/findyourzen/Bell.mp3"/> "
+        + "<audio src="https://s3.amazonaws.com/findyourzen/audio/bell.mp3"/>"
         + "</speak>",
       type: AlexaSkill.speechOutputType.SSML
     };
