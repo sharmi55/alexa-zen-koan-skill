@@ -132,13 +132,12 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput: {
-      type: "SSML",
-      SSML: <speak> Reflect <break time=\"20ms\"/> upon <break time=\"10ms\"/> this:
-              + fact
-            </speak>,
+    var speechOutput = {
+      speech: "<speak> Reflect <break time=\"10ms\"/> upon <break time=\"10ms\"/> this <break time=\"1s\"/>:" + fact + "</speak>",
       type: AlexaSkill.speechOutputType.SSML
     };
+//test passes with correct type in AWS test but not in Alexa developer portal.
+
     response.tellWithCard(speechOutput, "FindYourZen", speechOutput);
 }
 
