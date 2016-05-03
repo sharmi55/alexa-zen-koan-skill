@@ -1,4 +1,3 @@
-GetNewKoanIntent ask Find Your Zen for a koan
 GetNewKoanIntent begin zen practice
 GetNewKoanIntent a koan
 GetNewKoanIntent a zen koan

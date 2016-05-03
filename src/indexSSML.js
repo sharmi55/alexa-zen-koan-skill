@@ -58,7 +58,7 @@ var ZEN_KOANS = [
   "If you practice sitting as Buddha, you must kill Buddha.",
   "What do you call the world?",
   "Out of nowhere, the mind comes forth.",
-  "What moves, the flag or the wind?",
+  "What moves: the flag or the wind?",
   "If you are unable to find the truth right where you ar, where else do you expect to find it?",
   "A monk told Joshu, 'I have just entered this monastery. I beg you to teach me.' Joshu asked, 'Have you eaten your rice porridge?' The monk replied, 'I have.' 'Then,' said Joshu, 'Go and wash your bowl.' At that moment the monk was enlightened.",
   "The coin lost in the river is found in the river.",
@@ -109,16 +109,16 @@ SpaceGeek.prototype.intentHandlers = {
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can ask Zen Master 'tell me a koan', or, you can say exit... What can I help you with?", "What can I help you with?");
+        response.ask("You can ask Find Your Zen 'tell me a koan', or, you can say exit... What can I help you with?", "What can I help you with?");
     },
 
     "AMAZON.StopIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you.";
         response.tell(speechOutput);
     },
 
     "AMAZON.CancelIntent": function (intent, session, response) {
-        var speechOutput = "Goodbye";
+        var speechOutput = "Peace be with you.";
         response.tell(speechOutput);
     }
 };
@@ -132,10 +132,19 @@ function handleNewFactRequest(response) {
     var fact = ZEN_KOANS[factIndex];
 
     // Create speech output
-    var speechOutput = "Reflect upon, this. " + fact;
+    var speechOutput = {
+      speech: "<speak> Reflect upon <break time=\"10ms\"/> this. <break time=\"1s\"/>"
+        + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
+        + fact
+        + "<break time=\"1.5s\"/>"
+        + "<audio src='https://s3.amazonaws.com/findyourzen/audio/bell.mp3'/>"
+        + "</speak>",
+      type: AlexaSkill.speechOutputType.SSML
+    };
+//test passes with correct type in AWS test but not in Alexa developer portal.
 
     response.tellWithCard(speechOutput, "ZenMaster", speechOutput);
-}
+};
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
